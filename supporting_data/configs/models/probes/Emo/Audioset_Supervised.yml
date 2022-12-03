@@ -1,0 +1,33 @@
+MLP:
+  activation: relu
+  dropout: 0.5
+  l2_regularization: 0
+  layer_widths:
+  - 512
+  loss:
+    ScoochMeanSquaredError: null
+  metrics:
+  - ScoochMeanSquaredError: null
+  optimizer:
+    ScoochAdam:
+      amsgrad: false
+      beta_1: 0.9
+      beta_2: 0.999
+      epsilon: 1.0e-07
+      learning_rate: 0.001
+      name: Adam
+      schedule:
+        WarmupSchedule:
+          cold_learning_rate: 0
+          initial_step: 0
+          schedule:
+            ScoochCosineDecay:
+              alpha: 0
+              decay_steps: 9000
+              initial_learning_rate: 0.00025
+              name: null
+          warm_learning_rate: 0.00025
+          warmup_steps: 1000
+
+
+

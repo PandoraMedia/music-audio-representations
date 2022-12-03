@@ -1,0 +1,47 @@
+MLP:
+  activation: relu
+  input_dropout: null
+  l2_regularization: 1.0e-05
+  layer_dropouts:
+  - 0.5
+  - 0.5
+  layer_widths:
+  - 2048
+  - 2048
+  loss:
+    ScoochBinaryCrossentropy:
+      axis: -1
+      from_logits: true
+      label_smoothing: 0
+      name: binary_crossentropy
+      reduction: auto
+  metrics:
+  - ScoochAUC:
+      curve: PR
+      from_logits: true
+      multi_label: true
+      num_labels: null
+  optimizer:
+    ScoochAdam:
+      amsgrad: false
+      beta_1: 0.9
+      beta_2: 0.999
+      epsilon: 1.0e-07
+      learning_rate: 0.001
+      name: Adam
+      schedule:
+        WarmupSchedule:
+          cold_learning_rate: 0
+          initial_step: 0
+          schedule:
+            ScoochCosineDecay:
+              alpha: 0
+              decay_steps: 29000
+              initial_learning_rate: 0.0001
+              name: null
+          warm_learning_rate: 0.0001
+          warmup_steps: 1000
+  output_dropout: null
+
+
+

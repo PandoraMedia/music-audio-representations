@@ -32,7 +32,7 @@ pip install sxmp-mule
 
 This module requires FFMpeg to read audio files, which may be downloaded [here](https://ffmpeg.org/download.html).
 
-MULE uses SCOOCH as a configuration interface, which relies on yaml configuration files. To see an example configuration for running mule, please check out the provided configuration [here](/supporting_data/configs/mule_embedding.yml).
+MULE uses [SCOOCH](https://github.com/PandoraMedia/scooch) as a configuration interface, which relies on yaml configuration files. To see an example configuration for running mule, please check out the provided configuration [here](/supporting_data/configs/mule_embedding.yml).
 
 **NOTE:** MULE model weights are stored on `git lfs`. If you wish to run a model using these weights, we recommend you clone this git repository:
 

@@ -1,10 +1,10 @@
 # MULE - Your music understanding workhorse
 
-This codebase covers the MULE (**M**usicset **L**arge **U**nsupervised **E**mbedding) model and supporting materials for the ISMIR 2022 publication:
+This codebase covers the MULE (**M**usicset **U**nsupervised **L**arge **E**mbedding) model and supporting materials for the ISMIR 2022 publication:
 
 *Supervised and Unsupervised Learning of Audio Representations for Music Understanding*, M. C. McCallum, F. Korzeniowski, S. Oramas, F. Gouyon, A. F. Ehmann.
 
-It is intended for research purposes to better understand the results in the paper, and enable further research on audio embeddings or downstream models that rely on audio or multimodal understanding of music content.
+It is intended for research purposes to better understand the results in the paper, and enable further research into audio embeddings, or downstream models that rely on audio or multimodal understanding of music content.
 
 An overview of the training process for the MULE model is depicted below.
 
@@ -42,6 +42,6 @@ mule analyze --config ./configs/mule_embedding.yml -i ./test.wav -o ./embedding.
 
 In addition to the python mule module, this repository provides **more detailed results** and **hyperparameter configurations** for the probes trained in the aforementioned publication.
 
-**Reults** tables can be found in `./supporting_data/results`.
+**Results** tables can be found in `./supporting_data/results`.
 
-SCOOCH **hyperparameter** configurations can be found in `./supporting_data/configs/probes`.
+SCOOCH **hyperparameter** configurations for the experiments in the publication can be found in `./supporting_data/configs/probes`.

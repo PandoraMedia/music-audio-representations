@@ -64,7 +64,7 @@ REQUIRED_PACKAGES = [
     'librosa',
     'click==8.0.0a1',
     'scooch>=1.0.0',
-    'tensorflow'
+    'tensorflow==2.9.1'
 ]
 
 

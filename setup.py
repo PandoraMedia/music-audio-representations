@@ -28,7 +28,34 @@ import distutils.cmd
 long_description = """
 # MULE
 
-Musicset Unsupervised Large Embeddings are your music-audio workhorse!
+The Musicset Unsupervised Large Embedding (MULE) module is your 
+music-audio workhorse!
+
+This module contains [SCOOCH](https://github.com/PandoraMedia/scooch) configurable code to run a simple 
+analysis pipeline to extract audio embeddings from audio files which
+may then be used for downstream music understanding purposes.
+
+This module requires FFMpeg to read audio files, which may be 
+downloaded [here](https://ffmpeg.org/download.html).
+
+In order to create MULE embeddings, you will need a SCOOCH configuration
+describing the pipeline, and the model weights. Both are licensed under 
+the [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/legalcode) license, and can be found in this [module's github repository](https://github.com/PandoraMedia/music-audio-representations).
+
+To create embeddings for a single audio file, e.g., `test.wav` in the current
+directory, you can use this module in conjunction with the provided configuration
+and model weights:
+
+```
+pip install sxmp-mule
+git clone https://github.com/PandoraMedia/music-audio-representations.git
+cd ./music-audio-representations
+mule analyze --config ./supporting_data/configs/mule_embedding.yml -i ../test.wav -o ./embedding.npy
+```
+
+For more information on this module, please check out the publication:
+
+[*Supervised and Unsupervised Learning of Audio Representations for Music Understanding*](https://arxiv.org/abs/2210.03799), **M. C. McCallum**, F. Korzeniowski, S. Oramas, F. Gouyon, A. F. Ehmann.
 
 """
 
@@ -37,7 +64,7 @@ REQUIRED_PACKAGES = [
     'numpy',
     'librosa',
     'click==8.0.0a1',
-    'scooch',
+    'scooch>=1.0.0',
     'tensorflow'
 ]
 
@@ -48,12 +75,11 @@ setuptools.setup(
     description='',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="",
+    url="https://github.com/PandoraMedia/music-audio-representations",
     author="Matt C. McCallum",
     author_email="mmccallum@pandora.com",
     classifiers=[
         'Development Status :: 3 - Alpha',
-        'Intended Audience :: Developers',
         'Intended Audience :: Education',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
@@ -62,15 +88,16 @@ setuptools.setup(
         'Programming Language :: Python :: 3.10',
         'Topic :: Scientific/Engineering',
         'Topic :: Scientific/Engineering :: Mathematics',
-        'Topic :: Scientific/Engineering :: Artificial Intelligence'
+        'Topic :: Scientific/Engineering :: Artificial Intelligence',
+        'Topic :: Multimedia :: Sound/Audio :: Analysis',
     ],
     project_urls={
-        'Documentation': '',
-        'Bug Reports': '',
-        'Source': '',
+        'Documentation': 'https://github.com/PandoraMedia/music-audio-representations',
+        'Bug Reports': 'https://github.com/PandoraMedia/music-audio-representations/issues',
+        'Source': 'https://github.com/PandoraMedia/music-audio-representations',
     },
-    license='',
-    keywords='',
+    license='GNU GPL 3.0',
+    keywords='mule audio music embeddings machine learning',
 
     install_requires=REQUIRED_PACKAGES,
     python_requires='>=3.8',

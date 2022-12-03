@@ -2,7 +2,7 @@
 
 This codebase covers the MULE (**M**usicset **U**nsupervised **L**arge **E**mbedding) model and supporting materials for the ISMIR 2022 publication:
 
-*Supervised and Unsupervised Learning of Audio Representations for Music Understanding*, M. C. McCallum, F. Korzeniowski, S. Oramas, F. Gouyon, A. F. Ehmann.
+[*Supervised and Unsupervised Learning of Audio Representations for Music Understanding*](https://arxiv.org/abs/2210.03799), **M. C. McCallum**, F. Korzeniowski, S. Oramas, F. Gouyon, A. F. Ehmann.
 
 It is intended for research purposes to better understand the results in the paper, and enable further research into audio embeddings, or downstream models that rely on audio or multimodal understanding of music content.
 
@@ -30,12 +30,22 @@ MULE is hosted on pypi and may be installed with pip:
 pip install sxmp-mule
 ```
 
-MULE uses SCOOCH as a configuration interface, which relies on yaml configuration files. To see an example configuration for running mule, please check out the provided configuration [here](/configs/mule_embedding.yml).
+MULE uses SCOOCH as a configuration interface, which relies on yaml configuration files. To see an example configuration for running mule, please check out the provided configuration [here](/supporting_data/configs/mule_embedding.yml).
 
-To run MULE, you can use the CLI in conjuction with a SCOOCH yaml file, e.g.,
+**NOTE:** MULE model weights are stored on `git lfs`. If you wish to run a model using these weights, we recommend you clone this git repository:
 
 ```
-mule analyze --config ./configs/mule_embedding.yml -i ./test.wav -o ./embedding.npy
+git clone https://github.com/PandoraMedia/music-audio-representations.git
+```
+
+This repository contains both an example SCOOCH configuration and the MULE model weights, which may be used to analyze an audio file.
+
+For example, to run MULE you can use the `mule` CLI in conjuction with a SCOOCH yaml file, which by default references the mule model weights relative to the root directory in this repository e.g.,
+
+```
+git clone https://github.com/PandoraMedia/music-audio-representations.git
+cd ./music-audio-representations
+mule analyze --config ./supporting_data/configs/mule_embedding.yml -i ./test.wav -o ./embedding.npy
 ```
 
 # Supporting material

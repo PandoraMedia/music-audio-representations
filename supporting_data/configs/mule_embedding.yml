@@ -32,7 +32,7 @@ Analysis:                   # The analysis object describes a set of transformat
           BlockExtractor: null
           
     - EmbeddingFeature:     # The EmbeddingFeature takes input features, applies a model and stores the model output as its feature data.
-        model_location: "./model/"
+        model_location: "./supporting_data/model/"
         extractor:
           SliceExtractor:   # The SliceExtractor extracts slices of feature data from the input feature at regular intervals
             look_forward: 150

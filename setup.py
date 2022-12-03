@@ -22,7 +22,6 @@
 
 # Python standard library imports
 import setuptools
-import distutils.cmd
 
 
 long_description = """

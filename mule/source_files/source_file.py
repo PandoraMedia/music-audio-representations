@@ -50,6 +50,12 @@ class SourceFile(Configurable):
         """
         raise NotImplementedError(f"The class, {self.__class__.__name__}, has no method for reading files")
 
+    def close(self):
+        """
+        Closes any previously loaded file.
+        """
+        raise NotImplementedError(f"The class, {self.__class__.__name__}, has no method for closing files")
+
     def __len__(self):
         raise NotImplementedError(f"The class, {self.__class__.__name__} has no method for determining file data length")
         

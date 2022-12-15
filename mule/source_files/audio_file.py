@@ -109,6 +109,15 @@ class AudioFile(SourceFile):
 
             self.wav_file = in_mem_file
 
+    def close():
+        """
+        Closes any previously loaded file.
+        """
+        if self._wav_file is not None:
+            self._wav_file.close()
+        if hasattr(self, '_tempf'):
+            del self._tempf
+
     def _packing_string( self, num_frames ):
         """
         Get the string for packing or unpacking a given number of frames using the struct module.

@@ -58,6 +58,9 @@ class Analysis(Configurable):
             mule.features.Feature - The feature resulting from the configured feature
             transformations.
         """
+        for feat in [self._source_feature] + self._feature_transforms:
+            feat.clear()
+
         self._source_feature.from_file(fname)
         input_feature = self._source_feature
         for feature in self._feature_transforms:

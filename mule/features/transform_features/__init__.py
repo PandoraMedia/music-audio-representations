@@ -17,3 +17,4 @@
 from .transform_feature import TransformFeature
 from .mel_spectrogram import MelSpectrogram
 from .embedding_feature import EmbeddingFeature
+from .timeline_average import TimelineAverage

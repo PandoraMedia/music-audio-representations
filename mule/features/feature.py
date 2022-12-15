@@ -85,7 +85,7 @@ class Feature(Configurable):
         Args:
             path: str - The path to save the data to.
         """
-        np.save(path, self._data)
+        np.save(path, self.data)
 
     def clear(self):
         """

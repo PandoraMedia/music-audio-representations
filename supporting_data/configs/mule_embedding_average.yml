@@ -1,0 +1,45 @@
+#
+# The below SCOOCH configuration configures a pipeline
+# to create a MULE embedding for a single audio file.
+#
+
+Analysis:                   # The analysis object describes a set of transformations to apply to an input file 
+
+  source_feature:           # The source_feature describes the feature that decodes the file and will be the source of the first transformation
+
+    AudioWaveform:          # An AudioWaveform feature describes an audio waveform decoded from an input_file.
+      input_file:
+        AudioFile: 
+          sample_rate: 44100
+      sample_rate: 16000
+
+  feature_transforms:       # A list of feature transformations describes the sequence of transformations applied to the source_feature
+
+    - MelSpectrogram:       # A MelSpectrogram transforms and audio waveform into a feature to be used at the model input.
+        n_fft: 2048
+        hop_length: 160
+        win_length: 400
+        window: 'hann'
+        n_mels: 96
+        fmin: 0.0
+        fmax: 8000.0
+        norm: 2.0
+        mag_compression: 'log10_nonneg'
+        htk: True
+        power: 2.0
+        mag_range: null
+        extractor:          # An extractor describes how data from the input feature will be sampled / extracted to provide an input to this transformation
+          BlockExtractor: null
+          
+    - EmbeddingFeature:     # The EmbeddingFeature takes input features, applies a model and stores the model output as its feature data.
+        model_location: "./supporting_data/model/"
+        extractor:
+          SliceExtractor:   # The SliceExtractor extracts slices of feature data from the input feature at regular intervals
+            look_forward: 150
+            look_backward: 150
+            hop: 200
+
+    - TimelineAverage:
+        extractor:
+          BlockExtractor: null
+      

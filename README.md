@@ -41,13 +41,13 @@ git lfs install
 
 MULE uses [SCOOCH](https://github.com/PandoraMedia/scooch) as a configuration interface, which relies on yaml configuration files. To see an example configuration for running mule, please check out the provided configuration [here](/supporting_data/configs/mule_embedding_timeline.yml).
 
-In order to run the pretrained MULE model on a local audio file (e.g., `test.wav` in the current directory), you will need to clone this git repository which contains both the model weights and a SCOOCH configuration with which to run it:
+In order to run the pretrained MULE model on a local audio file, you will need to clone this git repository which contains both the model weights and a SCOOCH configuration with which to run it:
 
 ```
 git clone https://github.com/PandoraMedia/music-audio-representations.git
 cd ./music-audio-representations
 git lfs pull
-mule analyze --config ./supporting_data/configs/mule_embedding_timeline.yml -i ../test.wav -o ../embedding.npy
+mule analyze --config ./supporting_data/configs/mule_embedding_timeline.yml -i /path/to/input/test_audio.wav -o /path/to/output/embedding.npy
 ```
 
 The SCOOCH configuration `./supporting_data/configs/mule_embedding_timeline.yml` specifies all analysis parameters including where to find the model weights.

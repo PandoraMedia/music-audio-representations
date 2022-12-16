@@ -70,6 +70,6 @@ class TimelineAverage(TransformFeature):
     @property
     def data(self):
         """
-        The feature data blob itself.
+        The average of feature segments seen so far.
         """
         return self._data/self._feature_count

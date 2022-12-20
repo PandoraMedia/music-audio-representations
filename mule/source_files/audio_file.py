@@ -109,7 +109,7 @@ class AudioFile(SourceFile):
 
             self.wav_file = in_mem_file
 
-    def close():
+    def close(self):
         """
         Closes any previously loaded file.
         """

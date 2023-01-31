@@ -85,7 +85,16 @@ class Feature(Configurable):
         Args:
             path: str - The path to save the data to.
         """
-        np.save(path, self._data)
+        np.save(path, self.data)
+
+    def clear(self):
+        """
+        Clears any previously analyzed feature data, ready for a new analysis.
+        """
+        self._data = None
+        if hasattr(self, '_data_file'):
+            self._data_file.close()
+            del self._data_file
 
     @property
     def data(self):

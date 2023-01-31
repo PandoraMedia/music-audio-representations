@@ -30,24 +30,49 @@ MULE is hosted on pypi and may be installed with pip:
 pip install sxmp-mule
 ```
 
-This module requires FFMpeg to read audio files, which may be downloaded [here](https://ffmpeg.org/download.html).
+**NOTE:** This module requires FFMpeg to read audio files, which may be downloaded [here](https://ffmpeg.org/download.html).
 
-MULE uses SCOOCH as a configuration interface, which relies on yaml configuration files. To see an example configuration for running mule, please check out the provided configuration [here](/supporting_data/configs/mule_embedding.yml).
-
-**NOTE:** MULE model weights are stored on `git lfs`. If you wish to run a model using these weights, we recommend you clone this git repository:
+**NOTE:** MULE model weights are stored in this repository using `git lfs`. In order to use the pretrained MULE model, first ensure that git lfs is installed as described [here](https://git-lfs.github.com/). For example, on MacOS:
 
 ```
-git clone https://github.com/PandoraMedia/music-audio-representations.git
+brew install git-lfs
+git lfs install
 ```
 
-This repository contains both an example SCOOCH configuration and the MULE model weights, which may be used to analyze an audio file.
+MULE uses [SCOOCH](https://github.com/PandoraMedia/scooch) as a configuration interface, which relies on yaml configuration files. To see an example configuration for running mule, please check out the provided configuration [here](/supporting_data/configs/mule_embedding_timeline.yml).
 
-For example, to run MULE you can use the `mule` CLI in conjuction with a SCOOCH yaml file, which by default references the mule model weights relative to the root directory in this repository e.g.,
+In order to run the pretrained MULE model on a local audio file, you will need to clone this git repository which contains both the model weights and a SCOOCH configuration with which to run it:
 
 ```
 git clone https://github.com/PandoraMedia/music-audio-representations.git
 cd ./music-audio-representations
-mule analyze --config ./supporting_data/configs/mule_embedding.yml -i ./test.wav -o ./embedding.npy
+git lfs pull
+mule analyze --config ./supporting_data/configs/mule_embedding_timeline.yml -i /path/to/input/test_audio.wav -o /path/to/output/embedding.npy
+```
+
+**NOTE:** At this point you can ensure that the large model file was successfully downloaded from Git LFS by looking at the size of the files in the `./supporting_data/model/` directory. The model is approximately 250MB.
+
+The SCOOCH configuration `./supporting_data/configs/mule_embedding_timeline.yml` specifies all analysis parameters including where to find the model weights.
+
+The output of the commands above is a timeline of MULE embeddings for the provided audio file `test.wav` sampled every 2 seconds, e.g., for a 6 second audio file:
+
+```
+In [1]: import numpy as np
+
+In [2]: data = np.load('embedding.npy')
+
+In [3]: data.shape
+Out[3]: (1728, 3)
+
+In [4]: data
+Out[4]: 
+array([[ 0.02401832,  0.07947006,  0.0514956 ],
+       [-0.07212289, -0.02800103, -0.0738833 ],
+       [-0.12109657, -0.06731056,  0.07671715],
+       ...,
+       [ 0.02302092, -0.0231873 , -0.0185051 ],
+       [-0.0355757 , -0.00670745, -0.02728019],
+       [-0.10647963, -0.09881161, -0.07594919]], dtype=float32)
 ```
 
 # Supporting material

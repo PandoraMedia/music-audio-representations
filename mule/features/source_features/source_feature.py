@@ -60,6 +60,13 @@ class SourceFeature(Feature):
             processed_input_frames += self._CHUNK_SIZE
             self.add_data(data)
 
+    def clear(self):
+        """
+        Clears any previously analyzed feature data, ready for a new analysis.
+        """
+        super().clear()
+        self._input_file.close()
+
     def __len__(self):
         """
         Returns the number of bytes / samples / indices in the input data file.

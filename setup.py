@@ -64,13 +64,13 @@ REQUIRED_PACKAGES = [
     'librosa',
     'click==8.0.0a1',
     'scooch>=1.0.0',
-    'tensorflow'
+    'tensorflow==2.9.1'
 ]
 
 
 setuptools.setup(
     name='sxmp-mule',
-    version='1.0.0',
+    version='1.1.0',
     description='',
     long_description=long_description,
     long_description_content_type="text/markdown",

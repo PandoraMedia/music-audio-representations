@@ -50,6 +50,8 @@ git lfs pull
 mule analyze --config ./supporting_data/configs/mule_embedding_timeline.yml -i /path/to/input/test_audio.wav -o /path/to/output/embedding.npy
 ```
 
+**NOTE:** At this point you can ensure that the large model file was successfully downloaded from Git LFS by looking at the size of the files in the `./supporting_data/model/` directory. The model is approximately 250MB.
+
 The SCOOCH configuration `./supporting_data/configs/mule_embedding_timeline.yml` specifies all analysis parameters including where to find the model weights.
 
 The output of the commands above is a timeline of MULE embeddings for the provided audio file `test.wav` sampled every 2 seconds, e.g., for a 6 second audio file:

@@ -64,8 +64,7 @@ REQUIRED_PACKAGES = [
     'librosa',
     'click==8.0.0a1',
     'scooch>=1.0.0',
-    'tensorflow==2.9.1 ; sys_platform!="darwin" or platform_release<"21.6.0"',
-    'tensorflow-macos==2.9.1 ; sys_platform=="darwin" and platform_release>="21.6.0"'
+    'tensorflow==2.9.1'
 ]
 
 

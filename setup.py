@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2021 Pandora Media, LLC.
+# Copyright 2024 Pandora Media, LLC.
 #
 # Licensed under the GNU GPL License, Version 3.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@
 
 # Python standard library imports
 import setuptools
+import platform
 
 
 long_description = """
@@ -59,18 +60,32 @@ For more information on this module, please check out the publication:
 """
 
 
+# Tensorflow on ARM processors (i.e., macbooks with M1 or M2 or newer processors)
+# need a different compilation of tensorflow.
+# More details on the correct combinations of tensorflow packages below can be 
+# found here:
+#   https://developer.apple.com/metal/tensorflow-plugin/
+REQUIRED_TF = []
+if platform.processor()=='arm':
+    REQUIRED_TF += [
+        'tensorflow-macos==2.9.1',
+        'tensorflow-metal==0.5.0'
+    ]
+else:
+    REQUIRED_TF = ['tensorflow==2.9.1']
+
+
 REQUIRED_PACKAGES = [
     'numpy',
-    'librosa',
-    'click==8.0.0a1',
-    'scooch>=1.0.0',
-    'tensorflow==2.9.1'
-]
+    'librosa==0.9.2',
+    'click==8.1.7',
+    'scooch>=1.0.4'
+] + REQUIRED_TF
 
 
 setuptools.setup(
     name='sxmp-mule',
-    version='1.1.0',
+    version='1.1.1',
     description='',
     long_description=long_description,
     long_description_content_type="text/markdown",

@@ -17,3 +17,4 @@
 from .weight_standardization import WeightStandardization
 from .scalar_multiply import ScalarMultiply
 from .stoch_depth import StochDepth
+from .activations import *

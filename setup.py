@@ -60,32 +60,18 @@ For more information on this module, please check out the publication:
 """
 
 
-# Tensorflow on ARM processors (i.e., macbooks with M1 or M2 or newer processors)
-# need a different compilation of tensorflow.
-# More details on the correct combinations of tensorflow packages below can be 
-# found here:
-#   https://developer.apple.com/metal/tensorflow-plugin/
-REQUIRED_TF = []
-if platform.processor()=='arm':
-    REQUIRED_TF += [
-        'tensorflow-macos==2.9.1',
-        'tensorflow-metal==0.5.0'
-    ]
-else:
-    REQUIRED_TF = ['tensorflow==2.9.1']
-
-
 REQUIRED_PACKAGES = [
     'numpy',
     'librosa==0.9.2',
     'click==8.1.7',
-    'scooch>=1.0.4'
-] + REQUIRED_TF
+    'scooch>=1.0.4',
+    'tensorflow==2.13.1'
+]
 
 
 setuptools.setup(
     name='sxmp-mule',
-    version='1.1.1',
+    version='1.1.2',
     description='',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -97,7 +83,6 @@ setuptools.setup(
         'Intended Audience :: Education',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
-        'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
         'Topic :: Scientific/Engineering',
@@ -114,7 +99,7 @@ setuptools.setup(
     keywords='mule audio music embeddings machine learning',
 
     install_requires=REQUIRED_PACKAGES,
-    python_requires='>=3.8',
+    python_requires='>=3.9',
     packages=setuptools.find_packages(),
     include_package_data=True,
 

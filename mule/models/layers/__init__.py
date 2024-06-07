@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2021 Pandora Media, LLC.
+# Copyright 2024 Pandora Media, LLC.
 #
 # Licensed under the GNU GPL License, Version 3.0 (the "License");
 # you may not use this file except in compliance with the License.

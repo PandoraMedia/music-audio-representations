@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2021 Pandora Media, LLC.
+# Copyright 2024 Pandora Media, LLC.
 #
 # Licensed under the GNU GPL License, Version 3.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,6 +25,9 @@ from scooch import Param
 
 # Local imports
 from .transform_feature import TransformFeature
+from ...models.layers import WeightStandardization
+from ...models.layers import StochDepth
+from ...models.layers import ScalarMultiply
 
 
 class EmbeddingFeature(TransformFeature):
@@ -99,4 +102,11 @@ class EmbeddingFeature(TransformFeature):
             # TODO [matt.c.mccallum 11.21.22]: Write google storage download code here.
             pass
         # Otherwise assume local
-        self._model = tf.keras.models.load_model(self._model_location, compile=False)
+        custom_objects_dict = {
+            cls.__name__: cls for cls in [
+                WeightStandardization,
+                StochDepth,
+                ScalarMultiply
+            ]
+        }
+        self._model = tf.keras.models.load_model(self._model_location, custom_objects=custom_objects_dict, compile=False)

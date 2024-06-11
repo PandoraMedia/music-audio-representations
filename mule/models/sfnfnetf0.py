@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2021 Pandora Media, LLC.
+# Copyright 2024 Pandora Media, LLC.
 #
 # Licensed under the GNU GPL License, Version 3.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ from scooch import Param
 from .layers import WeightStandardization
 from .layers import ScalarMultiply
 from .layers import StochDepth
+from .layers import get_scaled_activation
 from .model import Model
 
 
@@ -353,7 +354,7 @@ class SfNfNetF0(Model):
             tf.keras.layers.GlobalAveragePooling2D(),   # Slow path
             tf.keras.layers.GlobalAveragePooling2D(),   # Fast path
             tf.keras.layers.Concatenate(),
-            tf.keras.layers.Activation(_scaled_activation(self._scaled_activation_type))
+            tf.keras.layers.Activation(get_scaled_activation(self._scaled_activation_type))
         ]
 
         #
@@ -428,7 +429,7 @@ class SfNfNetF0(Model):
         Return:
             <list(tf.keras.layers.Layer)> - The constructed layers for the stem module.
         """
-        activations = [_scaled_activation(self._scaled_activation_type)]*(len(kernels)-1) + [None]
+        activations = [get_scaled_activation(self._scaled_activation_type)]*(len(kernels)-1) + [None]
         layers = [
             self.get_conv(
                 channels=c,
@@ -588,14 +589,14 @@ class SfNfNetF0(Model):
         #
         if is_transition_block:
             input_layers = [
-                tf.keras.layers.Activation(_scaled_activation(self._scaled_activation_type)),
+                tf.keras.layers.Activation(get_scaled_activation(self._scaled_activation_type)),
                 ScalarMultiply(beta)
             ]
             residual_path = []
         else:
             input_layers = []
             residual_path = [
-                tf.keras.layers.Activation(_scaled_activation(self._scaled_activation_type)),
+                tf.keras.layers.Activation(get_scaled_activation(self._scaled_activation_type)),
                 ScalarMultiply(beta)
             ]
 
@@ -605,7 +606,7 @@ class SfNfNetF0(Model):
         strides = [[1,1], [freq_downsample,1], [1,1], [1,1]] # NOTE [matt.c.mccallum 03.11.22]: Should this frequency downsample be on the frequency convolution layer, or the first (time convoluation) layer? The original NFNet paper talks about striding on the first 3 x 3 conv layer, but in this case, freq convs don't happen until the second non-1x1 conv layer.
         per_layer_out_chans = [output_channels//2]*3 + [output_channels]
         groups = [1] + [output_channels//2//group_size]*2 + [1]
-        activations = [_scaled_activation(self._scaled_activation_type)]*(len(kernels)-1) + [None]
+        activations = [get_scaled_activation(self._scaled_activation_type)]*(len(kernels)-1) + [None]
         residual_path += list(itertools.chain(*[
             self.get_conv(
                 channels=c,
